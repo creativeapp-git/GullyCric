@@ -363,8 +363,8 @@ export async function getBatterScorecard(matchId: string, innings: number): Prom
 
   // Get all batters who batted in this innings
   const batters = await db.getAllAsync<{ batter_id: string }>(
-    `SELECT DISTINCT batter_id FROM balls WHERE match_id = ? AND innings = ?
-     AND is_wide = 0 ORDER BY MIN(rowid)`,
+    `SELECT batter_id FROM balls WHERE match_id = ? AND innings = ?
+     AND is_wide = 0 GROUP BY batter_id ORDER BY MIN(rowid)`,
     [matchId, innings]
   );
 
@@ -444,7 +444,7 @@ export async function getBowlerScorecard(matchId: string, innings: number): Prom
   const db = await getDatabase();
 
   const bowlers = await db.getAllAsync<{ bowler_id: string }>(
-    `SELECT DISTINCT bowler_id FROM balls WHERE match_id = ? AND innings = ? ORDER BY MIN(rowid)`,
+    `SELECT bowler_id FROM balls WHERE match_id = ? AND innings = ? GROUP BY bowler_id ORDER BY MIN(rowid)`,
     [matchId, innings]
   );
 

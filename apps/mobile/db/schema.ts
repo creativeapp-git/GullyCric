@@ -49,11 +49,6 @@ async function initializeSchema(database: SQLite.SQLiteDatabase) {
       FOREIGN KEY (host_id) REFERENCES users(id)
     );
 
-    -- Simple migration for existing DBs
-    PRAGMA table_info(matches); -- Just to have a check point
-    ALTER TABLE matches ADD COLUMN short_id TEXT;
-
-
     CREATE TABLE IF NOT EXISTS match_players (
       id TEXT PRIMARY KEY,
       match_id TEXT NOT NULL,
