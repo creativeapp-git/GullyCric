@@ -44,9 +44,7 @@ target/
 *.jar
 *.war
 *.ear
-.mvn/
-mvnw
-mvnw.cmd
+
 .classpath
 .project
 .settings/
